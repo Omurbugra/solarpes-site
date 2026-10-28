@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SolarPES – Okul enerji renovasyonu, bugün ve 2050</title>
+<meta name="description" content="SolarPES, Ankara'daki devlet okullarının enerji renovasyon senaryolarını bugünün ve 2050'nin ikliminde ölçen bir araştırma projesi.">
+<meta name="theme-color" content="#ECEEEB">
+<link rel="icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/explorer.css">
+<link rel="stylesheet" href="css/transition.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script>document.documentElement.classList.add("js");setTimeout(function(){var d=document.documentElement;if(!d.classList.contains("ready"))d.classList.add("rv-all")},4000)</script>
+<script>try{if(sessionStorage.getItem("sp-trans")==="1")document.documentElement.classList.add("arrive")}catch(e){}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-roof" viewBox="0 0 24 24"><path d="M3 11l9-6 9 6"/><path d="M5 10v9h14v-9"/></symbol>
+    <symbol id="i-wall" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M3 10h18M3 15h18M9 4v6M15 10v5M9 15v5"/></symbol>
+    <symbol id="i-window" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-ground" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M3 14l3-3M8 14l3-3M13 14l3-3M18 14l3-3"/><path d="M3 19h18"/></symbol>
+    <symbol id="i-shade" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M12 2v1.5M18 8h-1.5M6 8H4.5M16 4l-1 1M8 4l1 1"/><path d="M4 14h16M6 18h12"/></symbol>
+    <symbol id="i-pv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="11" rx="1"/><path d="M3 9h18M3 12.5h18M9 5v11M15 5v11"/><path d="M12 16v3M9 22h6"/></symbol>
+    <symbol id="i-hp" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="9" cy="12" r="3"/><path d="M9 9v6M6 12h6M16 10v4M19 10v4"/></symbol>
+    <symbol id="i-iod" viewBox="0 0 24 24"><path d="M10 13V5a2 2 0 0 1 4 0v8a4 4 0 1 1-4 0z"/><path d="M12 13v-4"/></symbol>
+    <symbol id="i-energy" viewBox="0 0 24 24"><path d="M13 3L5 13h6l-1 8 8-11h-6z"/></symbol>
+    <symbol id="i-emis" viewBox="0 0 24 24"><path d="M7 17h10a3 3 0 0 0 0-6 4.5 4.5 0 0 0-8.7-1.5A3.2 3.2 0 0 0 7 17z"/></symbol>
+    <symbol id="i-cost" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.5 9h4M9 12.5h4.5M11 7.5v9M9.5 14.5c.6 1 2 1.4 3 .6"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18 3v4.5h-4.5M6 21v-4.5h4.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<div class="curtain" aria-hidden="true"><span>SolarPES</span></div>
+<a class="skip" href="#main" data-i18n="skip">İçeriğe geç</a>
+
+<header class="bar" id="bar">
+  <a class="mark" href="#top"><img src="assets/img/logo.png" alt="" width="30" height="30"><span>SolarPES</span></a>
+  <nav class="links" id="links" aria-label="Bölümler" data-i18n-aria="navLabel">
+    <a href="#senaryolar"><span class="roll"><span data-i18n="navExplore">Senaryolar</span></span></a>
+    <a href="#olcutler"><span class="roll"><span data-i18n="navCriteria">Ölçütler</span></span></a>
+    <a href="#yontem"><span class="roll"><span data-i18n="navMethod">Yöntem</span></span></a>
+    <a href="#bulgular"><span class="roll"><span data-i18n="navFindings">Bulgular</span></span></a>
+    <a href="#hakkinda"><span class="roll"><span data-i18n="navAbout">Hakkında</span></span></a>
+    <a class="show-m" href="okullar.html"><span class="roll"><span data-i18n="navCompare">Okulları karşılaştır</span></span></a>
+  </nav>
+  <div class="bar-r">
+    <div class="lang" role="group" aria-label="Dil / Language">
+      <button type="button" data-lang="tr" aria-pressed="true">TR</button><button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" data-i18n="menu">Menü</button>
+    <a class="pill pill-white pill-md hide-m" href="okullar.html"><span class="roll"><span data-i18n="navCompare">Okulları karşılaştır</span></span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a class="pill pill-sun pill-md" href="senaryo/"><span class="roll"><span data-i18n="navCta">Senaryo kur</span></span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- Açılış: tam ekran dönüşüm filmi; başlık üst kenardan alt kenara -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="hero-frame" id="heroFrame">
+  <video class="hero-vid" id="heroVid" autoplay muted loop playsinline preload="metadata" poster="assets/img/okul-1990.jpg"
+    aria-label="Bir okul binasının renovasyonla dönüşümü, temsili animasyon" data-i18n-aria="heroVid">
+    <source src="assets/video/okul-donusum.mp4" type="video/mp4">
+  </video>
+  <div class="hero-shade" aria-hidden="true"></div>
+  </div>
+  <h1 class="hero-h" id="h1">
+    <span class="hl hl-1"><span data-i18n="h1a">Bugünün okulu,</span></span>
+    <span class="hl hl-2"><span data-i18n="h1b">2050'nin iklimi</span></span>
+  </h1>
+  <div class="hero-mid">
+    <p class="hero-lead" data-i18n="heroLead">SolarPES, Ankara'daki devlet okullarının enerji renovasyon senaryolarını bugünün ve 2050'nin ikliminde ölçen bir araştırma projesi.</p>
+  </div>
+</section>
+
+<!-- Sorun: cümle solda sabit kalır, okullar sağdan geçer -->
+<section class="intro wrap" id="sorun" data-bg="paper" aria-labelledby="introH">
+  <div class="intro-track" id="introTrack">
+    <div class="intro-sticky">
+      <div class="intro-text">
+        <h2 class="h-sub" id="introH" data-i18n="introH">Yalıtımsız okul, ısınan iklim</h2>
+        <p class="statement rv" data-i18n="introStatement">Okulların çoğu 1980–2000 arasında yalıtımsız yapıldı; enerjilerinin yüzde 85'i ısıtma gazı.</p>
+        <p class="intro-body rv" data-i18n="introBody1">SolarPES temsil gücü olan bir okulu saatlik modelleyip kabuk yalıtımı, güneş gölgelemesi, ısı pompası (VRF) ve çatı güneş panellerinden oluşan senaryoları hem bugünün hem 2050'nin ikliminde çalıştırır.</p>
+      </div>
+      <div class="intro-stack" id="introStack">
+        <figure class="st"><img src="assets/img/okul-yipranmis.jpg" alt="Yıpranmış beton cepheli, dört katlı bir devlet lisesi" data-i18n-alt="altWorn" width="1600" height="893" loading="lazy"><figcaption data-i18n="cap1">Beton karkas, yalıtımsız cephe</figcaption></figure>
+        <figure class="st"><img src="assets/img/okul-1990.jpg" alt="1990'larda yapılmış iki katlı bir okul binası ve bayrak direği" data-i18n-alt="alt1990" width="1600" height="893" loading="lazy"><figcaption data-i18n="cap2">1990'lardan iki katlı bir okul</figcaption></figure>
+        <figure class="st"><img src="assets/img/okul-tugla.jpg" alt="Avlulu, tuğla cepheli bir ortaokul binası" data-i18n-alt="altBrick" width="1600" height="893" loading="lazy"><figcaption data-i18n="cap3">Avlulu tuğla okul, U plan</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <dl class="scope">
+    <div class="rv"><dt data-i18n="sc1t">Bina</dt><dd data-i18n="sc1d">Ankara'daki K12 devlet okulları. Gerçek geometri, gerçek kabuk kesitleri ve gerçek fatura tüketimleriyle kalibre edilir.</dd></div>
+    <div class="rv"><dt data-i18n="sc2t">Araç</dt><dd data-i18n="sc2d">EnergyPlus 25.1 ile saatlik dinamik simülasyon. Yılın 8.760 saatinin her biri ayrı hesaplanır.</dd></div>
+    <div class="rv"><dt data-i18n="sc3t">Senaryo</dt><dd data-i18n="sc3d">Kabuk bileşenleri, güneş gölgelemesi, ısı pompası ve çatı güneş paneli; tek tek ve tüm birleşimleriyle.</dd></div>
+    <div class="rv"><dt data-i18n="sc4t">İklim</dt><dd data-i18n="sc4d">Bugün için 2009–2023 ölçümlerinden türetilen tipik yıl, gelecek için 2050 SSP5-8.5 ısınma senaryosu.</dd></div>
+  </dl>
+</section>
+
+<!-- 3B gezgin: yuvarlatılmış büyük çerçeve -->
+<section class="explorer wrap" id="senaryolar" data-bg="sky" aria-labelledby="exH">
+  <div class="sec-head">
+    <h2 class="h-head" id="exH" data-i18n="exH">Dokuz önlem, tek okul</h2>
+    <p class="rv" data-i18n="exP">Ankara'daki bir devlet okulunun 3B modeli. Bir önleme dokunun; model ona yaklaşır, nasıl uygulandığı ve dört ölçüte etkisi açılır.</p>
+  </div>
+  <div class="stage" id="stage" data-grow aria-label="Okul 3B modeli" data-i18n-aria="stage">
+    <img class="stage-poster" src="assets/img/okul-pv-vrf.jpg" alt="" width="1600" height="893" loading="lazy">
+    <div class="gl" id="gl"></div>
+    <div class="pins" id="pins" data-ui></div>
+    <div class="tip" id="tip" role="status" data-ui></div>
+    <p class="hint" id="hint" data-i18n="hint">Döndürmek için sürükleyin, yakınlaşmak için Ctrl ile kaydırın.</p>
+    <div class="ctl" data-ui>
+      <button type="button" id="rotBtn" data-i18n-title="rot" title="Otomatik döndür" aria-label="Otomatik döndür" data-i18n-aria="rot" aria-pressed="false"><svg class="ico"><use href="#i-rotate"/></svg></button>
+      <button type="button" id="homeBtn" data-i18n-title="home" title="Başa dön" aria-label="Başa dön" data-i18n-aria="home"><svg class="ico"><use href="#i-reset"/></svg></button>
+    </div>
+    <div class="ex-card" id="exCard">
+      <nav class="dock" id="dock" aria-label="Sistemler" data-ui></nav>
+    </div>
+    <div class="bigview" id="bigView" data-ui>
+      <button type="button" class="big-close" id="bigClose" data-i18n-aria="bigClose" aria-label="Büyük görünümü kapat"><svg class="ico"><use href="#i-close"/></svg></button>
+    </div>
+    <aside class="panel" id="panel" aria-hidden="true" aria-live="polite">
+      <div class="p-top">
+        <span class="p-tag" id="pTag"></span>
+        <span class="p-idx" id="pIdx">1 / 9</span>
+        <div class="p-nav">
+          <button type="button" id="pPrev" data-i18n-aria="prev" aria-label="Önceki sistem"><svg class="ico"><use href="#i-prev"/></svg></button>
+          <button type="button" id="pNext" data-i18n-aria="next" aria-label="Sonraki sistem"><svg class="ico"><use href="#i-next"/></svg></button>
+          <button type="button" id="pClose" data-i18n-aria="close" aria-label="Kapat"><svg class="ico"><use href="#i-close"/></svg></button>
+        </div>
+      </div>
+      <div class="p-scroll" id="pScroll">
+        <div class="p-head"><svg class="ico"><use id="pIco" href="#i-wall"/></svg><h3 id="pTitle"></h3></div>
+        <figure class="mini" id="mini">
+          <div class="mini-gl" id="miniGl"></div>
+          <figcaption id="miniCap"></figcaption>
+          <button type="button" class="mini-expand" id="miniBig" data-i18n-title="big" title="Detayı büyüt" aria-label="Detayı büyüt" aria-pressed="false" hidden><svg class="ico"><use href="#i-expand"/></svg></button>
+        </figure>
+        <ol class="legend" id="pLegend" hidden></ol>
+        <div id="pBody"></div>
+        <h4 class="p-sub" data-i18n="effects">Dört göstergeye etkisi</h4>
+        <ul class="eff" id="pEff"></ul>
+      </div>
+    </aside>
+    <div class="loader" id="loader" data-ui>
+      <div class="ld-box">
+        <span><span data-i18n="loading">Model yükleniyor</span> <b id="ldPct">0%</b></span>
+        <i><em id="ldBar"></em></i>
+      </div>
+    </div>
+    <noscript><p class="nojs" data-i18n="noScript">3B model için JavaScript gerekir. Görsel, yenilenmiş okulun temsili bir görünümüdür.</p></noscript>
+  </div>
+</section>
+
+<!-- Ölçütler: solda sabit fotoğraf, sağda etkin liste -->
+<section class="criteria wrap" id="olcutler" data-bg="paper" aria-labelledby="crH">
+  <div class="cr-track" id="crTrack"><div class="cr-sticky">
+  <div class="cr-head">
+    <h2 class="h-head" id="crH" data-i18n="crH">Dört ölçüt, tek puan yok</h2>
+    <p class="cr-p rv" data-i18n="crP">Her senaryo dört ölçütle birlikte değerlendirilir. Öncelik sırası enerji, emisyon, maliyet ve konfor; dördü de ayrı verilir.</p>
+  </div>
+  <div class="cr-photo" aria-hidden="true">
+    <img class="on" data-k="0" src="assets/img/vrf.jpg" alt="" width="1600" height="893" loading="lazy">
+    <img data-k="1" src="assets/img/cati-pv.jpg" alt="" width="1600" height="893" loading="lazy">
+    <img data-k="2" src="assets/img/duvar-yalitimi.jpg" alt="" width="1600" height="893" loading="lazy">
+    <img data-k="3" src="assets/img/golgeleme.jpg" alt="" width="1600" height="893" loading="lazy">
+  </div>
+  <div class="cr-list">
+    <ol class="crl" id="crl">
+      <li class="on" data-k="0">
+        <button type="button" class="crl-b" aria-expanded="true" aria-controls="cr0"><span data-i18n="cr1t">Yıllık enerji ihtiyacı</span><small>kWh/m²·yıl</small></button>
+        <div class="crl-d" id="cr0">
+          <p data-i18n="cr1p">Isıtma, soğutma, aydınlatma ve ekipman birlikte. Isı pompası ile kazan ve split klima ayrı ayrı hesaplanır, böylece sistem değişiminin etkisi görünür.</p>
+          <p class="crl-m" data-i18n="cr1m">EnergyPlus 25.1 ile saatlik dinamik simülasyon; sonuç ısıtma, soğutma, aydınlatma, ekipman ve fan olarak ayrılır.</p>
+        </div>
+      </li>
+      <li data-k="1">
+        <button type="button" class="crl-b" aria-expanded="false" aria-controls="cr1"><span data-i18n="cr2t">Yıllık karbon salımı</span><small>kg CO₂/yıl</small></button>
+        <div class="crl-d" id="cr1">
+          <p data-i18n="cr2p">Harcanan enerjinin karbon karşılığı. Şebekenin 2050'ye kadar temizlenmesi modellenir; aynı enerji farklı yıllarda farklı karbon üretebilir.</p>
+          <p class="crl-m" data-i18n="cr2m">Her enerji taşıyıcısı kendi emisyon faktörüyle çarpılır; mevcut eğilim ve net sıfır için ayrı faktör dizileri.</p>
+        </div>
+      </li>
+      <li data-k="2">
+        <button type="button" class="crl-b" aria-expanded="false" aria-controls="cr2"><span data-i18n="cr3t">Yatırım ve geri ödeme</span><small data-i18n="cr3u">TL, yıl</small></button>
+        <div class="crl-d" id="cr2">
+          <p data-i18n="cr3p">İlk yatırım, yıllık tasarruf ve geri ödeme süresi. Bakanlık birim fiyatları ve okulların gerçek elektrik ve doğalgaz tarifeleri kullanılır.</p>
+          <p class="crl-m" data-i18n="cr3m">Metraj, Çevre ve Şehircilik Bakanlığı birim fiyatlarıyla çarpılır; tasarruf, verim kaybıyla birlikte 25 yıl izlenir.</p>
+        </div>
+      </li>
+      <li data-k="3">
+        <button type="button" class="crl-b" aria-expanded="false" aria-controls="cr3"><span data-i18n="cr4t">Yaz konforu</span><small data-i18n="cr4u">aşım saati</small></button>
+        <div class="crl-d" id="cr3">
+          <p data-i18n="cr4p">Sınıfların aşırı ısındığı saatler ve kabul edilen sınırla ilişkisi. En sıcak haftalar tatile denk geldiği için sıralamada dördüncü gelir.</p>
+          <p class="crl-m" data-i18n="cr4m">Mekanik soğutma kapalıyken iç sıcaklıklar saatlik izlenir; dış sıcaklığa bağlı hareketli sınırın üstündeki saatler sayılır.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+  </div></div>
+</section>
+
+<!-- İki araç: ölçütlerden hemen sonra; her biri canlı bir arayüz parçasıyla -->
+<section class="tools wrap" id="araclar" data-bg="ink" aria-labelledby="tlH">
+  <div class="tl-head">
+    <h2 class="h-head" id="tlH" data-i18n="tlH">Şimdi kendi okulunuzu ölçün</h2>
+    <p class="rv" data-i18n="tlP">Aynı dört ölçütü kendi binanızda görün ya da okulunuzu benzerleriyle karşılaştırın. İkisi de tarayıcıda çalışır, kayıt gerektirmez.</p>
+  </div>
+
+  <article class="tool tool-a">
+    <a class="tool-vis" href="senaryo/" tabindex="-1" aria-hidden="true">
+      <figure class="tool-ph"><img src="assets/img/okul-pv-vrf.jpg" alt="" width="1600" height="893" loading="lazy"></figure>
+      <div class="ui-card ui-wiz" data-ui>
+        <div class="ui-row"><span data-i18n="uiFloors">Kat sayısı</span><span class="ui-seg s4"><i>1</i><i>2</i><i>3</i><i>4</i><b></b></span></div>
+        <div class="ui-row"><span data-i18n="uiGlaz">Cam</span><span class="ui-seg s3 g"><i data-i18n="uiSingle">Tek</i><i data-i18n="uiDouble">Çift</i><i data-i18n="uiTriple">Üçlü</i><b></b></span></div>
+        <div class="ui-row"><span data-i18n="uiWall">Duvar yalıtımı</span><span class="ui-tog"><b></b></span></div>
+        <div class="ui-row ui-res"><span data-i18n="uiClass">Enerji sınıfı</span><span class="ui-cls"><i class="c-e">E</i><i class="c-b">B</i></span></div>
+      </div>
+    </a>
+    <div class="tool-tx">
+      <h3 class="h-sub" data-i18n="d1t">Senaryo kur ve analiz et</h3>
+      <p data-i18n="t1p">Okul türünü, kat sayısını, planı ve kabuğu seçin; SolarPES binanızı bir arketipe eşler. Sonra yalıtımı, gölgelemeyi, ısı pompasını ve güneş panelini 3B model üzerinde deneyin.</p>
+      <ol class="steps"><li data-i18n="t1s1">Binayı tanımla</li><li data-i18n="t1s2">Önlemleri dene</li><li data-i18n="t1s3">Raporu al</li></ol>
+      <a class="pill pill-sun pill-lg" href="senaryo/"><span class="roll"><span data-i18n="heroCta">Senaryo kur ve analiz et</span></span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </article>
+
+  <article class="tool tool-b">
+    <a class="tool-vis" href="okullar.html" tabindex="-1" aria-hidden="true">
+      <figure class="tool-ph"><img src="assets/img/okul-lise.jpg" alt="" width="1600" height="893" loading="lazy"></figure>
+      <div class="ui-card ui-cmp" data-ui>
+        <p class="ui-t" data-i18n="uiEnergy">Enerji indeksi, baz 100</p>
+        <div class="ui-bar" style="--w:100%;--k:#FFD23F"><span>Deneme A. L.</span><i></i><b>100</b></div>
+        <div class="ui-bar" style="--w:51%;--k:#7CC6FF"><span>Etimesgut A. L.</span><i></i><b>51</b></div>
+        <div class="ui-bar" style="--w:40%;--k:#9BE38A"><span>Ülkü Akın O.</span><i></i><b>40</b></div>
+      </div>
+    </a>
+    <div class="tool-tx">
+      <h3 class="h-sub" data-i18n="d2t">Okulları karşılaştır</h3>
+      <p data-i18n="t2p">Yirmi okulu enerji sınıfına, türüne ve planına göre süzün; en çok üçünü enerji, emisyon, maliyet ve konforda aynı ölçekte yan yana görün.</p>
+      <ol class="steps"><li data-i18n="t2s1">Sınıfa göre süz</li><li data-i18n="t2s2">Üç okul seç</li><li data-i18n="t2s3">Yan yana gör</li></ol>
+      <a class="pill pill-light pill-lg" href="okullar.html"><span class="roll"><span data-i18n="heroCta3">Okulları karşılaştır</span></span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </article>
+</section>
+
+<!-- Yöntem: okul yılını sürgüyle gez -->
+<section class="method wrap" id="yontem" data-bg="leaf" aria-labelledby="mtH">
+  <div class="mt-split">
+    <div class="mt-left">
+      <h2 class="h-head" id="mtH" data-i18n="mtH">Bir okul yılı, 8.760 saat</h2>
+      <p class="mt-clause" id="mtClause" aria-live="polite"></p>
+    </div>
+    <div class="mt-right" data-ui>
+      <div class="yr" id="yr" aria-hidden="true">
+        <i style="--d:30"></i><i style="--d:212"></i><i style="--d:45"></i><i style="--d:78"></i>
+      </div>
+      <dl class="yr-read">
+        <div><dt data-i18n="yrLen">Süre</dt><dd id="yrLen"></dd></div>
+        <div><dt data-i18n="yrLoad">Baskın yük</dt><dd id="yrLoad"></dd></div>
+        <div><dt data-i18n="yrCount">Modelde</dt><dd id="yrCount"></dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="mt-slider">
+    <label class="sr" for="yrRange" data-i18n="yrLabel">Okul yılının dönemi</label>
+    <input type="range" id="yrRange" min="0" max="3" step="1" value="1">
+    <ol class="yr-names" id="yrNames">
+      <li><button type="button" data-i="0" data-i18n="ys0">Eylül</button></li>
+      <li><button type="button" data-i="1" data-i18n="ys1">Ekim–nisan</button></li>
+      <li><button type="button" data-i="2" data-i18n="ys2">Mayıs–haziran</button></li>
+      <li><button type="button" data-i="3" data-i18n="ys3">Yaz tatili</button></li>
+    </ol>
+  </div>
+  <div class="mt-count">
+    <h3 class="h-sub rv" data-i18n="mcH">Tarama</h3>
+    <dl class="figlines">
+      <div class="rv"><dt>31</dt><dd data-i18n="mc1">kabuk kurgusu: çatı, duvar, cam ve zemin, iki yalıtım düzeyinde tam faktöriyel</dd></div>
+      <div class="rv"><dt>93</dt><dd data-i18n="mc2">senaryo: her kabuk kurgusu gölgeleme, ısı pompası ve çatı güneş paneliyle yeniden</dd></div>
+      <div class="rv"><dt>186</dt><dd data-i18n="mc3">simülasyon: her senaryo bugünün ve 2050'nin ikliminde ayrı ayrı</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- İklim: tek sarı bölüm -->
+<section class="climate wrap" id="iklim" data-bg="sun" aria-labelledby="clH">
+  <div class="cl-grid">
+    <h2 class="cl-h" id="clH" data-i18n="clH">2050'de soğutma yükü üç katına çıkıyor</h2>
+    <div class="cl-figs">
+      <div class="rv"><b data-count="3" data-pre="×">×3</b><p data-i18n="clT1">soğutma yükü, 2050 ikliminde aynı binada</p></div>
+      <div class="rv"><b data-count="37" data-pre="−%">−%37</b><p data-i18n="clT2">ısıtma yükü; toplam enerji azalır ama gazdan elektriğe kayar</p></div>
+    </div>
+    <p class="cl-p rv" data-i18n="clP">Her senaryo iki iklimde birden sınanır: 2009–2023 ölçümlerinden türetilen bugünkü tipik yıl ve SSP5-8.5 ısınma senaryosunda 2050. Okul binaları otuz yıldan uzun kullanılır; bugün verilen karar ısınmış bir iklimde işlemek zorunda.</p>
+    <div class="cl-notes">
+      <div class="rv"><h3 data-i18n="cln1t">Ne değişiyor</h3><p data-i18n="cln1">Yaz sıcaklıkları yükseliyor, kış daha ılık geçiyor. Isıtma ihtiyacı düşerken soğutma ihtiyacı artıyor.</p></div>
+      <div class="rv"><h3 data-i18n="cln2t">Yakıt el değiştiriyor</h3><p data-i18n="cln2">Isıtma azaldıkça doğalgazın payı küçülüyor; soğutma ve ısı pompasıyla elektriğin payı büyüyor.</p></div>
+      <div class="rv"><h3 data-i18n="cln3t">Karbon şebekeye bağlanıyor</h3><p data-i18n="cln3">Elektrik payı büyüdükçe karbon hesabı, şebekenin 2050'ye kadar ne kadar temizleneceğine bağlanıyor.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Bulgular: sakin sayı satırları ve şekiller -->
+<section class="findings wrap" id="bulgular" data-bg="paper" aria-labelledby="fdH">
+  <div class="fd-top">
+    <div class="fd-lines">
+      <h2 class="h-head" id="fdH" data-i18n="fdH">Sayılar ne diyor</h2>
+      <p class="fd-p rv" data-i18n="fdP">Tek bir okulun yıllık simülasyon sonuçları. Eğilimi anlatır, her binaya doğrudan aktarılamaz.</p>
+      <dl class="figlines">
+        <div class="rv"><dt>223.800</dt><dd data-i18n="fd1">kWh/yıl, okulun bugünkü baz tüketimi</dd></div>
+        <div class="rv"><dt>%85</dt><dd data-i18n="fd2">ısıtma gazı: 190.495 kWh doğalgaz, 33.305 kWh elektrik</dd></div>
+        <div class="rv"><dt>−%63</dt><dd data-i18n="fd3">toplam enerji, kazan ve split klima yerine ısı pompası (VRF) ile</dd></div>
+        <div class="rv"><dt>63→34</dt><dd data-i18n="fd4">kWh/m²·yıl, dört kabuk bileşeni Passive düzeyde birlikte</dd></div>
+      </dl>
+    </div>
+    <figure class="fd-ph rv"><img src="assets/img/okul-pv-vrf.jpg" alt="Çatısında güneş panelleri, avlusunda ısı pompası üniteleri olan yenilenmiş okul" data-i18n-alt="altRenov" width="1600" height="893" loading="lazy"><figcaption data-i18n="capRenov">Yenilenmiş okul: çatıda güneş paneli, avluda ısı pompası</figcaption></figure>
+  </div>
+</section>
+
+<section class="gallery" id="sekiller" data-bg="paper" aria-labelledby="figsH">
+  <div class="hgal" id="hgal">
+    <div class="hgal-sticky">
+      <div class="hgal-head wrap">
+        <h2 class="h-sub" id="figsH" data-i18n="figsH">Simülasyon şekilleri</h2>
+        <p data-i18n="figsP">186 simülasyonun sonuçları, altı şekilde. Büyütmek için bir şekle dokunun.</p>
+      </div>
+      <div class="figs-clip"><div class="figs" id="figs">
+        <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/enduse_scatter.jpg"><img src="assets/fig/enduse_scatter.jpg" alt="Kullanım alanlarına göre yıllık enerji, senaryo başına dağılım grafiği" data-i18n-alt="fig1a" width="1000" height="864" loading="lazy"></button>
+      <figcaption><b data-i18n="fig1t">Enerji dağılımı</b><span data-i18n="fig1d">Kullanım alanlarına göre yıllık enerji. Her işaret bir senaryo, bugün ve 2050 birlikte.</span></figcaption></figure>
+    <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/vrf_cop.jpg"><img src="assets/fig/vrf_cop.jpg" alt="Dış sıcaklığa göre ısı pompası verimi grafiği" data-i18n-alt="fig2a" width="1000" height="600" loading="lazy"></button>
+      <figcaption><b data-i18n="fig2t">Isı pompası verimi</b><span data-i18n="fig2d">Dış sıcaklık değiştikçe ısıtma ve soğutma veriminin değişimi.</span></figcaption></figure>
+    <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/pv_generation_ssr.jpg"><img src="assets/fig/pv_generation_ssr.jpg" alt="Çatı güneş paneli üretimi ve öz tüketim oranı grafiği" data-i18n-alt="fig3a" width="1000" height="600" loading="lazy"></button>
+      <figcaption><b data-i18n="fig3t">Çatı üretimi ve öz tüketim</b><span data-i18n="fig3d">Üretilen elektriğin ne kadarı binada kullanılıyor, ne kadarı şebekeye gidiyor.</span></figcaption></figure>
+    <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/iod_by_scenario.jpg"><img src="assets/fig/iod_by_scenario.jpg" alt="Senaryolara göre aşırı ısınma saatleri grafiği" data-i18n-alt="fig4a" width="1000" height="600" loading="lazy"></button>
+      <figcaption><b data-i18n="fig4t">Senaryolara göre aşırı ısınma</b><span data-i18n="fig4d">Her senaryonun sınır aşımı saatleri, bugün ve 2050 karşılaştırmalı.</span></figcaption></figure>
+    <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/shading_effect.jpg"><img src="assets/fig/shading_effect.jpg" alt="Gölgelemenin aşırı ısınmaya etkisi grafiği" data-i18n-alt="fig5a" width="1000" height="600" loading="lazy"></button>
+      <figcaption><b data-i18n="fig5t">Gölgelemenin etkisi</b><span data-i18n="fig5d">Gölgeleme eklendiğinde aşırı ısınma saatlerinde görülen değişim.</span></figcaption></figure>
+    <figure class="fig"><button type="button" class="fig-open" data-src="assets/fig/iod_shading.jpg"><img src="assets/fig/iod_shading.jpg" alt="Senaryo başına sınır aşımı saatleri ve uyumlu sınıf oranı, gölgelemeli ve gölgelemesiz" data-i18n-alt="fig6a" width="1000" height="1062" loading="lazy"></button>
+      <figcaption><b data-i18n="fig6t">Gölgeleme ve uyumlu sınıflar</b><span data-i18n="fig6d">Senaryo başına sınır aşımı saatleri ve konfor sınırında kalan sınıf oranı, bugün ve 2050.</span></figcaption></figure>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Hakkında -->
+<section class="about wrap" id="hakkinda" data-bg="sky" aria-labelledby="abH">
+  <figure class="ab-ph"><img data-par src="assets/img/okul-ogrenciler.jpg" alt="Okul binasının önünde yürüyen öğrenciler ve veliler" data-i18n-alt="altStudents" width="1600" height="1600" loading="lazy"></figure>
+  <div class="ab-tx">
+    <h2 class="h-head" id="abH" data-i18n="abH">Bir ODTÜ GÜNAM projesi</h2>
+    <p data-i18n="abP">SolarPES, açık adıyla Solar Energy Powered Positive Energy Schools, güneş enerjisiyle kendi enerjisini üreten, iklim dostu okul binalarının yolunu arar. Bu site projenin ölçme tarafıdır: sonuçlar gerçek geometri, gerçek kabuk kesitleri ve gerçek faturalarla kalibre edilmiş modellerden gelir; yöntem ve varsayımlar açıkça verilir.</p>
+    <div class="ab-cols">
+      <div>
+        <h3 data-i18n="ab1t">Yürütücü ve ortaklar</h3>
+        <ul>
+          <li data-i18n="ab1a">ODTÜ GÜNAM, Güneş Enerjisi Araştırma ve Uygulama Merkezi (koordinatör)</li>
+          <li data-i18n="ab1b">Ankara Kalkınma Ajansı</li>
+          <li data-i18n="ab1c">Ankara İl Milli Eğitim Müdürlüğü</li>
+          <li data-i18n="ab1d">ODTÜ Geliştirme Vakfı Okulları</li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="ab2t">Destek</h3>
+        <p data-i18n="ab2p">AB hibe programı kapsamında, T.C. Çevre, Şehircilik ve İklim Değişikliği Bakanlığı AB ve Dış İlişkiler Genel Müdürlüğü tarafından yürütülen program ile desteklenmektedir.</p>
+        <p class="ref">EuropeAid/182996/ID/ACT/TR</p>
+      </div>
+    </div>
+    <a class="tlink" href="https://gunam.metu.edu.tr/" rel="noopener"><span data-i18n="abGo">ODTÜ GÜNAM'ı ziyaret et</span><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot wrap" data-bg="ink">
+  <p class="ft-word" aria-hidden="true">SolarPES</p>
+  <div class="ft-line">
+    <p class="ft-say" data-i18n="ftShort">Okul binaları için enerji senaryoları</p>
+    <nav class="ft-nav" aria-label="Alt menü" data-i18n-aria="ftNav">
+      <a href="#senaryolar" data-i18n="navExplore">Senaryolar</a>
+      <a href="#yontem" data-i18n="navMethod">Yöntem</a>
+      <a href="okullar.html" data-i18n="navSchools">Okullar</a>
+      <a href="senaryo/" data-i18n="navCta">Senaryo kur</a>
+    </nav>
+    <p class="ft-legal" data-i18n="ftLegal">© 2026 SolarPES, ODTÜ GÜNAM. Okul görselleri temsilidir.</p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Şekil" data-i18n-aria="lbAria">
+  <button type="button" class="lb-x" id="lbX" aria-label="Kapat" data-i18n-aria="close"><svg class="ico"><use href="#i-close"/></svg></button>
+  <img id="lbImg" alt="">
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/transition.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>
