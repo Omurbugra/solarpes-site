@@ -153,7 +153,7 @@ export const PAGE_EN = {
   altRoof: 'Flat roof insulation layers: concrete slab, thermal insulation, waterproofing and gravel',
   ctaH: 'Set up your own school',
 
-  abH: 'A METU GÜNAM project',
+  abH: 'The project and its partners',
   abP: 'SolarPES, Solar Energy Powered Positive Energy Schools, looks for ways to climate-friendly school buildings that make their own energy from the sun. This site is the measuring side of the project: results come from models calibrated with real geometry, real envelope sections and real bills, and the methods and assumptions are stated openly.',
   altStudents: 'Students and parents walking in front of a school building',
   ab1t: 'Lead and partners',
